@@ -8,11 +8,3 @@ import "@egjs/vue3-flicking/dist/flicking-inline.css";
 
 createApp(App).use(Flicking).mount('#app');
 
-
-function onbeforeunload() {
-    if (!confirm("คุณต้องการรีเฟรชหน้าเว็บนี้หรือไม่?")) {
-        return false;
-    }
-}
-
-window.onbeforeunload = onbeforeunload;
