@@ -1,8 +1,8 @@
 <template>
-  <div class="container ">
+  <div class="container">
     <Flicking :options="{ align: 'center' }">
-      <div class="panel" v-for="(item, index) in useCards" :key="index" ref="`${item.letter}${item.sign}`">
-        <div class="cards" :class="{ 'card-sign-r': item.sign % 2==0 , 'card-sign-b':item.sign % 2==1}">
+      <div class="panel" v-for="(item, index) in useCards" :key="index" >
+        <div class="cards" :class="{ 'card-sign-r': item.sign % 2 == 0, 'card-sign-b': item.sign % 2 == 1 }">
           <div class="back-cards" @click="($event) => { $event.target.hidden = true; }"></div>
           <div class="letter-head letter">
             <b>{{ item.letter }}</b>
@@ -19,19 +19,12 @@
         </div>
       </div>
     </Flicking>
-
-
   </div>
 </template>
 
 <script>
 import { defineComponent, computed } from 'vue';
-
 import Flicking from "@egjs/vue3-flicking";
-
-
-// const letter = 
-// const sign = [1, 2, 3, 4];
 
 export default defineComponent(
   {
@@ -54,37 +47,26 @@ export default defineComponent(
             "sign": s,
             "show": false
           });
-          this.useCards.push(c);
+          this.cards.push(c);
         }
       }
 
-      
+      for (let i = 0; i <= this.cards.length; i++) {
+        const index = Math.floor(Math.random() * this.cards.length);
+
+        if (this.useCards.indexOf(this.cards[index]) === -1) {
+          this.useCards.push(this.cards[index]);
+        }
+      }
+
+      console.log(this.useCards)
+
     },
     components: {
       Flicking
     }
   }
 );
-
-
-
-// const cards = computed(() => {
-//   let array = [];
-//   for (let l of letter) {
-//     for (let s of sign) {
-//       let c = new Object({
-//         "letter": l,
-//         "sign": s,
-//         "show": false
-//       });
-//       array.push(c);
-//     }
-//   }
-//   return array;
-
-// });
-
-// let useCards = cards
 
 </script>
 
