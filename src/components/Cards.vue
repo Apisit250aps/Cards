@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Flicking :options="{ align: 'center' }">
-      <div class="panel" v-for="(item, index) in useCards" :key="index" >
+      <div class="panel" v-for="(item, index) in useCards" :key="index">
         <div class="cards" :class="{ 'card-sign-r': item.sign % 2 == 0, 'card-sign-b': item.sign % 2 == 1 }">
           <div class="back-cards" @click="($event) => { $event.target.hidden = true; }"></div>
           <div class="letter-head letter">
@@ -39,27 +39,28 @@ export default defineComponent(
       };
     },
     mounted() {
-
-      for (let l of this.letter) {
-        for (let s of this.sign) {
-          let c = new Object({
-            "letter": l,
-            "sign": s,
-            "show": false
-          });
-          this.cards.push(c);
+      const config = {
+        headers: {
+          "Cache-Control": "no-cache",
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Access-Control-Allow-Origin": "*",
         }
-      }
+      };
 
-      for (let i = 0; i <= this.cards.length; i++) {
-        const index = Math.floor(Math.random() * this.cards.length);
+      axios({
+        method: "get",
+        url: "https://cardbackend.vercel.app/api/cards",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET"
+        },
 
-        if (this.useCards.indexOf(this.cards[index]) === -1) {
-          this.useCards.push(this.cards[index]);
-        }
-      }
-
-      console.log(this.useCards)
+      })
+        .then((response) => {
+          if (response.data['status']) {
+            this.useCards = response.data['data'];
+          }
+        });
 
     },
     components: {
