@@ -39,22 +39,16 @@ export default defineComponent(
       };
     },
     mounted() {
-      const config = {
-        headers: {
-          "Cache-Control": "no-cache",
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Access-Control-Allow-Origin": "*",
-        }
-      };
-
+      
       axios({
         method: "get",
-        url: "https://cardbackend.vercel.app/api/cards",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET"
-        },
-
+        baseURL: 'https://aapi-chi.vercel.app',
+        url: "/api/card/shuffle",
+        // headers: {
+        //   "Access-Control-Allow-Origin": "*",
+        //   "Access-Control-Allow-Methods": "*",
+        //   "Access-Control-Allow-Headers": "Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token",
+        // },
       })
         .then((response) => {
           if (response.data['status']) {
