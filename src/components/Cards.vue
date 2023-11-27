@@ -10,8 +10,8 @@
           <div class="sign">
             <i v-if="(item.sign == 1)" class="bi bi-suit-club-fill card-sign"></i>
             <i v-if="(item.sign == 2)" class="bi bi-suit-diamond-fill card-sign"></i>
-            <i v-if="(item.sign == 3)" class="bi bi-suit-heart-fill card-sign"></i>
-            <i v-if="(item.sign == 4)" class="bi bi-suit-spade-fill card-sign"></i>
+            <i v-if="(item.sign == 3)" class="bi bi-suit-spade-fill card-sign"></i>
+            <i v-if="(item.sign == 4)" class="bi bi-suit-heart-fill card-sign"></i>
           </div>
           <div class="letter-foot letter">
             <b>{{ item.letter }}</b>
